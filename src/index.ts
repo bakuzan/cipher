@@ -17,7 +17,10 @@ console.log(
 program
   .version('0.0.1')
   .description('Encode/decode cipher input')
-  .argument('<text>', 'Cipher will encode the text with the given cipher')
+  .argument(
+    '<text>',
+    'Text to be acted upon using the given mode and cipher options.'
+  )
   .addOption(
     new Option('-m, --mode <mode>', 'Cipher mode')
       .choices(enumValues(Mode))
