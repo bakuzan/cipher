@@ -7,9 +7,11 @@ import { Option, program } from 'commander';
 import { enumValues } from './utils';
 import { Mode } from './constants/Mode';
 import { Cipher } from './constants/Cipher';
+import { CipherOptions } from './constants/CipherOptions';
+import processor from './ciphers';
 
 console.log(
-  chalk.red(figlet.textSync('cipher-cli', { horizontalLayout: 'full' }))
+  chalk.green(figlet.textSync('cipher-cli', { horizontalLayout: 'full' }))
 );
 
 program
@@ -30,5 +32,8 @@ program
 
 const text = program.args.join(' ');
 const options = program.opts();
+const cipherOptions = options as CipherOptions;
 
-console.log('Inputs : ', text, options);
+const result = processor(text, cipherOptions);
+console.log(`\n\r\n\r`);
+console.log(`Input ${cipherOptions.mode}d: `, result);
