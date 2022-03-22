@@ -10,33 +10,37 @@ import { Cipher } from './constants/Cipher';
 import { CipherOptions } from './constants/CipherOptions';
 import processor from './ciphers';
 
-console.log(
-  chalk.green(figlet.textSync('cipher-cli', { horizontalLayout: 'full' }))
-);
+async function run() {
+  console.log(
+    chalk.green(figlet.textSync('cipher-cli', { horizontalLayout: 'full' }))
+  );
 
-program
-  .version('0.0.1')
-  .description('Encode/decode cipher input')
-  .argument(
-    '<text>',
-    'Text to be acted upon using the given mode and cipher options.'
-  )
-  .addOption(
-    new Option('-m, --mode <mode>', 'Cipher mode')
-      .choices(enumValues(Mode))
-      .makeOptionMandatory()
-  )
-  .addOption(
-    new Option('-c, --cipher <type>', 'Use the specified type of cipher')
-      .choices(enumValues(Cipher))
-      .makeOptionMandatory()
-  )
-  .parse(process.argv);
+  program
+    .version('0.0.1')
+    .description('Encode/decode cipher input')
+    .argument(
+      '<text>',
+      'Text to be acted upon using the given mode and cipher options.'
+    )
+    .addOption(
+      new Option('-m, --mode <mode>', 'Cipher mode')
+        .choices(enumValues(Mode))
+        .makeOptionMandatory()
+    )
+    .addOption(
+      new Option('-c, --cipher <type>', 'Use the specified type of cipher')
+        .choices(enumValues(Cipher))
+        .makeOptionMandatory()
+    )
+    .parse(process.argv);
 
-const text = program.args.join(' ');
-const options = program.opts();
-const cipherOptions = options as CipherOptions;
+  const text = program.args.join(' ');
+  const options = program.opts();
+  const cipherOptions = options as CipherOptions;
 
-const result = processor(text, cipherOptions);
-console.log(`\n\r\n\r`);
-console.log(`Input ${cipherOptions.mode}d: `, result);
+  const result = await processor(text, cipherOptions);
+  console.log(`\n\r\n\r`);
+  console.log(`Input ${cipherOptions.mode}d: `, result);
+}
+
+run();

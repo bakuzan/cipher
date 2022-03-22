@@ -1,3 +1,4 @@
+import prompts from 'prompts';
 import { alphabet } from '../constants';
 import { Mode } from '../constants/Mode';
 
@@ -23,8 +24,17 @@ function decode(text: string, n: number) {
   return encode(text, -n);
 }
 
-export default function processor(text: string, mode: Mode) {
-  const shift = 8;
+export default async function processor(text: string, mode: Mode) {
+  const response = await prompts({
+    type: 'number',
+    name: 'offset',
+    message: 'What is the rotation offset?',
+    validate: (value: number) =>
+      value < 1 || value > 25
+        ? `Offset must be between 0 and 26, exclusive.`
+        : true
+  });
 
+  const shift = response.offset;
   return mode === 'encode' ? encode(text, shift) : decode(text, shift);
 }

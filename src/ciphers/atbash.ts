@@ -19,7 +19,7 @@ function converter(text: string, list: string[], listBackwards: string[]) {
   return output;
 }
 
-export default function processor(text: string, mode: Mode) {
+export default async function processor(text: string, mode: Mode) {
   return mode === 'encode'
     ? converter(text, alphabet, reversedAlphabet)
     : converter(text, reversedAlphabet, alphabet);
