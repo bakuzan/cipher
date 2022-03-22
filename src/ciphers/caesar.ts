@@ -5,7 +5,7 @@ function encode(text: string, n: number) {
   const chars = text.split('');
   let output = '';
 
-  for (let c of chars) {
+  for (const c of chars) {
     const index = alphabet.findIndex((x) => x === c.toLowerCase());
     if (index !== -1) {
       const modded = (index + n) % 26;
