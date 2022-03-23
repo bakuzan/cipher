@@ -25,15 +25,18 @@ function decode(text: string, n: number) {
 }
 
 export default async function processor(text: string, mode: Mode) {
-  const response = await prompts({
-    type: 'number',
-    name: 'offset',
-    message: 'What is the rotation offset?',
-    validate: (value: number) =>
-      value < 1 || value > 25
-        ? `Offset must be between 0 and 26, exclusive.`
-        : true
-  });
+  const response = await prompts(
+    {
+      type: 'number',
+      name: 'offset',
+      message: 'What is the rotation offset?',
+      validate: (value: number) =>
+        value < 1 || value > 25
+          ? `Offset must be between 0 and 26, exclusive.`
+          : true
+    },
+    { onCancel: () => true }
+  );
 
   const shift = response.offset;
   return mode === 'encode' ? encode(text, shift) : decode(text, shift);
