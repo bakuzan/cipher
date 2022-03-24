@@ -4,6 +4,7 @@ import { CipherOptions } from '../constants/CipherOptions';
 
 import affineProcessor from './affine';
 import atbashProcessor from './atbash';
+import baconianProcessor from './baconian';
 import caesarProcessor from './caesar';
 
 export default async function processor(text: string, options: CipherOptions) {
@@ -12,6 +13,8 @@ export default async function processor(text: string, options: CipherOptions) {
       return await affineProcessor(text, options.mode);
     case Cipher.Atbash:
       return await atbashProcessor(text, options.mode);
+    case Cipher.Baconian:
+      return await baconianProcessor(text, options.mode);
     case Cipher.Caesar:
       return await caesarProcessor(text, options.mode);
     default:
