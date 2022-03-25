@@ -6,6 +6,7 @@ import affineProcessor from './affine';
 import atbashProcessor from './atbash';
 import baconianProcessor from './baconian';
 import caesarProcessor from './caesar';
+import rot13Processor from './rot13';
 
 export default async function processor(text: string, options: CipherOptions) {
   switch (options.cipher) {
@@ -17,6 +18,8 @@ export default async function processor(text: string, options: CipherOptions) {
       return await baconianProcessor(text, options.mode);
     case Cipher.Caesar:
       return await caesarProcessor(text, options.mode);
+    case Cipher.Rot13:
+      return await rot13Processor(text, options.mode);
     default:
       console.log(
         chalk.red(
