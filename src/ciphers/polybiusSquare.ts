@@ -1,7 +1,7 @@
 import { polybiusSquare } from '../constants';
 import { Mode } from '../constants/Mode';
 
-function encode(text: string) {
+export function encode(text: string) {
   const chars = text.split('');
   let output = '';
 
@@ -23,7 +23,7 @@ function encode(text: string) {
   return output;
 }
 
-function decode(text: string) {
+export function decode(text: string) {
   const nums = text.split('');
   let output = '';
   let pair = '';
