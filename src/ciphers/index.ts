@@ -6,6 +6,7 @@ import affineProcessor from './affine';
 import atbashProcessor from './atbash';
 import baconianProcessor from './baconian';
 import caesarProcessor from './caesar';
+import polybiusSquareProcessor from './polybiusSquare';
 import rot13Processor from './rot13';
 
 export default async function processor(text: string, options: CipherOptions) {
@@ -18,6 +19,8 @@ export default async function processor(text: string, options: CipherOptions) {
       return await baconianProcessor(text, options.mode);
     case Cipher.Caesar:
       return await caesarProcessor(text, options.mode);
+    case Cipher.PolybiusSquare:
+      return await polybiusSquareProcessor(text, options.mode);
     case Cipher.Rot13:
       return await rot13Processor(text, options.mode);
     default:

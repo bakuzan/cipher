@@ -3,5 +3,6 @@ export enum Cipher {
   Atbash = 'atbash',
   Baconian = 'bacon',
   Caesar = 'caesar',
+  PolybiusSquare = 'polybiussquare',
   Rot13 = 'ROT13'
 }
