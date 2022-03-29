@@ -1,3 +1,6 @@
+import fs from 'fs';
+import { CipherOptions } from './constants/CipherOptions';
+
 export function enumValues<O extends object>(obj: O): string[] {
   return Object.values(obj);
 }
@@ -40,4 +43,20 @@ export function chunk(arr: any[], size: number) {
   return Array.from({ length: Math.ceil(arr.length / size) }, (_, i) =>
     arr.slice(i * size, i * size + size)
   );
+}
+
+export async function readTextFromFile(filePath: string) {
+  return fs.readFileSync(filePath, 'utf8').toString();
+}
+
+export async function writeTextToFile(options: CipherOptions, text: string) {
+  if (options.file === undefined) {
+    throw new Error('File undefined!');
+  }
+
+  const outputFilePath = options.file.split('.').slice(0, -1).join('.');
+  const filename = `${outputFilePath}_${options.mode.toString()} output.txt`;
+  fs.writeFileSync(filename, text);
+
+  console.log(`Result output to: `, outputFilePath);
 }
