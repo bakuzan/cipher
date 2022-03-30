@@ -20,7 +20,7 @@ async function run() {
     .description('Encode/decode cipher input')
     .addOption(
       new Option(
-        '-t, --text <text>',
+        '-t, --text <text...>',
         'Text to be acted upon using the given mode and cipher options.'
       ).conflicts('file')
     )
@@ -43,7 +43,7 @@ async function run() {
     .parse(process.argv);
 
   const options = program.opts();
-  if (!options.text && !options.file) {
+  if ((!options.text || options.text.length === 0) && !options.file) {
     console.log(
       `One of the following options are required: -t, --text or -f --file`
     );
@@ -52,7 +52,7 @@ async function run() {
 
   const cipherOptions = options as CipherOptions;
   let outputToFile = false;
-  let text = cipherOptions.text;
+  let text = cipherOptions.text ? cipherOptions.text.join(' ') : undefined;
 
   if (text === undefined) {
     outputToFile = true;
